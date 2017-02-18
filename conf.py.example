@@ -1,0 +1,12 @@
+#!/usr/bin/python
+
+class Conf:
+
+  config = {
+    # account credentials
+    'account_sid': '***',
+    'auth_token': '***',
+
+    # twilio number used to initialize call
+    'number_from': '***'
+  }
