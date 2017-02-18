@@ -8,5 +8,15 @@ class Conf:
     'auth_token': '***',
 
     # twilio number used to initialize call
-    'number_from': '***'
+    'number_from': '***',
+
+    # default number to call
+    'default_number_to': '',
+
+    # xml/json TwiML to use
+    'twiml_file_url': 'https://domain.com/twilio.xml',
+
+    # logging
+    'logging_enabled': True,
+    'log_file': '/var/log/zabbix_twilio_connector.log'
   }
