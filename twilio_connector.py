@@ -8,7 +8,7 @@ import sys
 
 c = conf.Conf
 parser = argparse.ArgumentParser()
-parser.add_argument("-t", "--to", action='store', help="Number in international format to call")
+parser.add_argument("to", action='store', help="Number in international format to call")
 args = parser.parse_args()
 
 class Zabbix_connector:
@@ -48,5 +48,7 @@ z = Zabbix_connector()
 call = z.makeCall()
 
 # if logging is on, write to log
-z.logCall(call)
+if c.config['logging_enabled'] == True:
+  z.logCall(call)
+
 sys.exit(0)
