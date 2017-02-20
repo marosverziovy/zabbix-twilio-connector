@@ -6,7 +6,7 @@ import sys
 from twilio.rest import Client
 from config import Config as c
 
-class Zabbix_connector:
+class Zabbix_connector(object):
 
     global args
 
