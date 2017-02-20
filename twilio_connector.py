@@ -1,10 +1,10 @@
 #!env/bin/python
 
-from twilio.rest import Client
-from config import Config as c
 import argparse
 import datetime
 import sys
+from twilio.rest import Client
+from config import Config as c
 
 class Zabbix_connector:
 
