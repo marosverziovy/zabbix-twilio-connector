@@ -1,4 +1,4 @@
 env/*
-conf.py
+config.py
 .idea/*
 *.pyc

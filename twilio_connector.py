@@ -1,18 +1,19 @@
 #!/usr/bin/python
 
 from twilio.rest import Client
-import conf
+from config import Config as c
 import argparse
 import datetime
 import sys
 
-c = conf.Conf
-parser = argparse.ArgumentParser()
-parser.add_argument("to", action='store', help="Number in international format to call")
-args = parser.parse_args()
-
 class Zabbix_connector:
+
   global args
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument("to", action='store', help="Number in international format to call")
+  args = parser.parse_args()
+
 
   def connectToApi(self):
       return Client(c.config['account_sid'], c.config['auth_token'])
@@ -26,7 +27,7 @@ class Zabbix_connector:
   def makeCall(self):
     call = self.connectToApi().calls.create(
       to=self.numberTo(),
-      from_=c.config['number_from'],
+      from_=self.numberFrom(),
       url=c.config['twiml_file_url'])
     return(call)
 
@@ -42,13 +43,14 @@ class Zabbix_connector:
     f.write(str(log) + "\n")
     f.close()
 
-z = Zabbix_connector()
+if __name__ == "__main__":
+  z = Zabbix_connector()
 
-# make actual call
-call = z.makeCall()
+  # make actual call
+  call = z.makeCall()
 
-# if logging is on, write to log
-if c.config['logging_enabled'] == True:
-  z.logCall(call)
+  # if logging is on, write to log
+  if c.config['logging_enabled'] == True:
+    z.logCall(call)
 
-sys.exit(0)
+  sys.exit(0)
