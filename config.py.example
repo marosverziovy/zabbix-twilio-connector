@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-class Conf:
+class Config:
 
   config = {
     # account credentials
