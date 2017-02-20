@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!env/bin/python
 
 from twilio.rest import Client
 from config import Config as c
@@ -11,25 +11,19 @@ class Zabbix_connector:
     global args
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("to", action='store', help="Number in international format to call")
+    parser.add_argument("to", nargs='?', action='store', help="Number in international format to call", default=c.config['default_number_to'])
     args = parser.parse_args()
 
     def connectToApi(self):
         return Client(c.config['account_sid'], c.config['auth_token'])
-
-    def numberTo(self):
-        if args.to:
-            return args.to
-        else:
-            return c.config['default_number_to']
 
     def numberFrom(self):
         return c.config['number_from']
 
     def makeCall(self):
         call = self.connectToApi().calls.create(
-            to=self.numberTo(),
-            from_=self.numberFrom(),
+            to=args.to,
+            from_   =self.numberFrom(),
             url=c.config['twiml_file_url'])
         return(call)
 
