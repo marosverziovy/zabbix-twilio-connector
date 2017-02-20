@@ -12,6 +12,7 @@ class Zabbix_connector:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("to", nargs='?', action='store', help="Number in international format to call", default=c.config['default_number_to'])
+    parser.add_argument("eventid", nargs='?', action='store', help="Event ID to store in log")
     args = parser.parse_args()
 
     def connectToApi(self):
@@ -33,6 +34,7 @@ class Zabbix_connector:
                'sid': call.sid,
                'timestamp': datetime.date.today().strftime("%x %X"),
                'status': call.status,
+               'eventid': args.eventid
                }
 
         f = open(c.config['log_file'], 'aw')
